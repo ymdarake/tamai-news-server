@@ -6,6 +6,6 @@ $result = [];
 foreach ($newsXml->item as $item) {
 	$result[] = ['title' => $item->title, 'link' => $item->link, 'image' => $item->description];
 	$str = (string)$item->description;
-	preg_match('/<img src="(.*)\?ref=rss"/', $str, $matches);
+	preg_match('/<img src="(.*)"/', $str, $matches);
 	var_dump($matches);
 }
