@@ -9,7 +9,7 @@ foreach ($newsXml->item as $item) {
 	$image = isset($matches[1]) ? $matches[1] : '';
 	$result[] = [
 		'title' => $item->title,
-		'link' => substr($item->link, -strlen('?ref=rss')),
+		'link' => substr($item->link, 0, -strlen('?ref=rss')),
 		'image' => $image
 	];
 }
