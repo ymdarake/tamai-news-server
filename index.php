@@ -2,9 +2,9 @@
 
 $newsXml = new SimpleXMLElement(file_get_contents("http://feeds.cnn.co.jp/rss/cnn/cnn.rdf"));
 
-var_dump($newsXml);
-
+$result = [];
 foreach ($newsXml->item as $item) {
-	echo $item->title;
-	echo $item->link;
+	$result[] = ['title' => $item->title, 'link' => $item->link, 'image' => $item->description->p->a];
 }
+
+echo json_encode($result);
