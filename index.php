@@ -6,8 +6,5 @@ $result = [];
 foreach ($newsXml->item as $item) {
 	$result[] = ['title' => $item->title, 'link' => $item->link, 'image' => $item->description];
 	var_dump($item->description);
-	var_dump($item->description->p);
-	var_dump($item->description->p->a);
+	var_dump((string)$item->description);
 }
-
-// echo json_encode($result);
