@@ -5,6 +5,7 @@ $newsXml = new SimpleXMLElement(file_get_contents("http://feeds.cnn.co.jp/rss/cn
 $result = [];
 foreach ($newsXml->item as $item) {
 	$result[] = ['title' => $item->title, 'link' => $item->link, 'image' => $item->description];
-	var_dump($item->description);
-	var_dump((string)$item->description);
+	$str = (string)$item->description;
+	preg_match('/<img src="(.*)\?ref=rss"/', $str, $matches);
+	var_dump($matches);
 }
