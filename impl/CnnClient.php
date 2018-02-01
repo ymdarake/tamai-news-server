@@ -15,7 +15,7 @@ class CnnClient {
 			$image = isset($matches[1]) ? $matches[1] : '';
 			$result[] = [
 				'title' => (string)$item->title,
-				'description' => mb_substr(str_replace('<p>', '', str_replace('<![CDATA[<p>', '', $description)), 0, LINE_DESCRIPTION_MAX_LENGTH, 'UTF-8'),
+				'description' => str_replace('<p>', '', str_replace('<![CDATA[<p>', '', $description)),
 				'link' => substr($item->link, 0, -strlen('?ref=rss')),
 				'image' => $image
 			];
