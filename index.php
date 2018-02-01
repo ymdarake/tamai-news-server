@@ -6,7 +6,7 @@ require_once(__DIR__ . "/impl/BingNewsSearchApiClient.php");
 require_once(__DIR__ . "/impl/CnnClient.php");
 
 
-$searchWhiteList = ["玉井詩織", "百田夏菜子", "ももクロ", "ももいろクローバーZ", "佐々木彩夏", "高城れに", "ももいろクローバー"]
+$searchWhiteList = ["玉井詩織", "百田夏菜子", "ももクロ", "ももいろクローバーZ", "佐々木彩夏", "高城れに", "ももいろクローバー"];
 
 if (isset($_GET['word']) && in_array($_GET['word'], $searchWhiteList)) {
 	$client = new BingNewsSearchApiClient();
