@@ -10,8 +10,8 @@ foreach ($newsXml->item as $item) {
 	preg_match("/<img src='(.*)'/", $description, $matches);
 	$image = isset($matches[1]) ? $matches[1] : '';
 	$result[] = [
-		'title' => $item->title[0],
-		'description' => mb_substr(str_replace('<p>', '', str_replace('<![CDATA[<p>', '', $description)), 0, 60, 'UTF-8'),
+		'title' => (string)$item->title,
+		'description' => mb_substr(str_replace('<p>', '', str_replace('<![CDATA[<p>', '', $description)), 0, 80, 'UTF-8'),
 		'link' => substr($item->link, 0, -strlen('?ref=rss')),
 		'image' => $image
 	];
