@@ -3,7 +3,7 @@
 define("LINE_DESCRIPTION_MAX_LENGTH", 60);
 
 require_once(__DIR__ . '/vendor/autoload.php');
-require_once(__DIR__ . "/config/secret.php");
+require_once(__DIR__ . "/config/env.php");
 require_once(__DIR__ . "/impl/BingNewsSearchApiClient.php");
 
 // $newsXml = new SimpleXMLElement(file_get_contents("http://feeds.cnn.co.jp/rss/cnn/cnn.rdf"));
