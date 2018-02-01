@@ -1,6 +1,6 @@
 <?php
 
-defne("LINE_DESCRIPTION_MAX_LENGTH", 60);
+define("LINE_DESCRIPTION_MAX_LENGTH", 60);
 
 require_once(__DIR__ . '/vendor/autoload.php');
 
