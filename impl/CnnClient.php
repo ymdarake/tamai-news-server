@@ -15,7 +15,7 @@ class CnnClient {
 			$image = isset($matches[1]) ? $matches[1] : '';
 			$result[] = [
 				'title' => (string)$item->title,
-				'description' => str_replace('<p>', '', str_replace('<![CDATA[<p>', '', $description)),
+				'description' => mb_substr(str_replace('<p>', '', str_replace('<![CDATA[<p>', '', $description)), 0, 60, 'UTF-8'),//長すぎるとタグが混じってパースできなくなるので60文字で切る
 				'link' => substr($item->link, 0, -strlen('?ref=rss')),
 				'image' => $image
 			];
