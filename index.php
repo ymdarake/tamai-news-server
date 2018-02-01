@@ -11,7 +11,7 @@ foreach ($newsXml->item as $item) {
 	$image = isset($matches[1]) ? $matches[1] : '';
 	$result[] = [
 		'title' => $item->title[0],
-		'description' => mb_substr($item->description, strlen("<![CDATA[<p>"), 100, 'UTF-8'),
+		'description' => mb_substr($item->description, mb_strlen("<![CDATA[<p>"), 100, 'UTF-8'),
 		'link' => substr($item->link, 0, -strlen('?ref=rss')),
 		'image' => $image
 	];
