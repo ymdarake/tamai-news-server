@@ -5,25 +5,16 @@ define("LINE_DESCRIPTION_MAX_LENGTH", 60);
 require_once(__DIR__ . '/vendor/autoload.php');
 require_once(__DIR__ . "/config/env.php");
 require_once(__DIR__ . "/impl/BingNewsSearchApiClient.php");
+require_once(__DIR__ . "/impl/CnnClient.php");
 
-// $newsXml = new SimpleXMLElement(file_get_contents("http://feeds.cnn.co.jp/rss/cnn/cnn.rdf"));
 
-// $result = [];
-// foreach ($newsXml->item as $item) {
-// 	$description = (string)$item->description;
-// 	preg_match("/<img src='(.*)'/", $description, $matches);
-// 	$image = isset($matches[1]) ? $matches[1] : '';
-// 	$result[] = [
-// 		'title' => (string)$item->title,
-// 		'description' => mb_substr(str_replace('<p>', '', str_replace('<![CDATA[<p>', '', $description)), 0, LINE_DESCRIPTION_MAX_LENGTH, 'UTF-8'),
-// 		'link' => substr($item->link, 0, -strlen('?ref=rss')),
-// 		'image' => $image
-// 	];
-// }
+$_GET['word'] = "玉井詩織";
 
-// echo json_encode($result);
+if (isset($_GET['word'])) {
+	$client = new BingNewsSearchApiClient();
+	echo json_encode($client->search($_GET['word']));
+	exit;
+}
 
-$apiClient = new BingNewsSearchApiClient();
-$result = $apiClient->search();
-// var_dump(json_decode($result, true));
-echo $result;
+echo json_encode((new CnnClient())->search());
+exit;

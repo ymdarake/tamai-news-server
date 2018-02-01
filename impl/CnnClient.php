@@ -1,11 +1,11 @@
 <?php
 
-class Cnn {
+class CnnClient {
 
 	public function __construct() {
 	}
 
-	public function fetch() {
+	public function search() {
 		$newsXml = new SimpleXMLElement(file_get_contents("http://feeds.cnn.co.jp/rss/cnn/cnn.rdf"));
 		
 		$result = [];

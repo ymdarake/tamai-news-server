@@ -10,34 +10,35 @@ class BingNewsSearchApiClient {
 		$this->apiKey = $apiKey;
 	}
 
-	public function search() {
-		$term = '玉井詩織';
-
+	public function search($word) {
 		if (strlen($this->apiKey) == 32) {
-		    $json = $this->_search($term);
-		    return $json;
+		    return $this->format($this->_search($word));
 		} else {
 		    print("Invalid Bing Search API subscription key!\n");
 		    print("Please paste yours into the source code.\n");
 		}
 	}
 
-	private function _search($query) {
-	    $options = ['http' => ['header' => "Ocp-Apim-Subscription-Key: {$this->apiKey}\r\n", 'Accept-Language' => "ja-JP", 'method' => 'GET']];
+	private function _search($word) {
+	    $options = ['http' => ['header' => "Ocp-Apim-Subscription-Key: {$this->apiKey}\r\n", 'method' => 'GET']];
 	    $context = stream_context_create($options);
-	    $url = $this->endPoint . "?" . http_build_query(["q" => urlencode($query), "count" => "10", "originalImg" => "true"]);
-	    $result = file_get_contents($url, false, $context);
-	    return $result;
+	    // TODO: urlencodeして検索
+	    $url = $this->endPoint . "?" . http_build_query(["q" => $word, 'count' => 20, 'mkt' => "ja-JP", "originalImg" => "true"]);
+	    return file_get_contents($url, false, $context);
+	}
 
-	    // Extract Bing HTTP headers
-	    // $headers = array();
-	    // foreach ($http_response_header as $k => $v) {
-	    //     $h = explode(":", $v, 2);
-	    //     if (isset($h[1]))
-	    //         if (preg_match("/^BingAPIs-/", $h[0]) || preg_match("/^X-MSEdge-/", $h[0]))
-	    //             $headers[trim($h[0])] = trim($h[1]);
-	    // }
-	    // return array($headers, $result);
+	private function format($json) {
+		$result = [];
+		$assocArray = json_decode($json, true);
+		foreach ($assocArray['value'] as $each) {
+			$result[] = [
+				'title' => $each['name'],
+				'description' => $each['description'],
+				'image' => isset($each['image']) ? $each['image']['thumbnail']['contentUrl'] : '',
+				'link' => $each['url']
+			];
+		}
+		return $result;
 	}
 
 }
