@@ -1,5 +1,6 @@
 {
   "require": {
-    "php": "^7.2.1"
+    "php": ">=7.0.27",
+    "symfony/polyfill-mbstring": "^1.6"
   }
 }
