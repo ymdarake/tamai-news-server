@@ -25,7 +25,7 @@ class BingNewsSearchApiClient {
 	private function _search($query) {
 	    $options = ['http' => ['header' => "Ocp-Apim-Subscription-Key: {$this->apiKey}\r\n",'method' => 'GET']];
 	    $context = stream_context_create($options);
-	    $url = $this->endPoint . "?" . http_build_query(["q" => urlencode($query), "count" => "10", "originalImg" => "true"]);
+	    $url = $this->endPoint . "?" . http_build_query(["q" => urlencode($query), "setLang" => "ja-JP", "count" => "10", "originalImg" => "true"]);
 	    $result = file_get_contents($url, false, $context);
 	    return $result;
 
