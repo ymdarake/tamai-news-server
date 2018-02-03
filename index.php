@@ -2,17 +2,42 @@
 
 require_once(__DIR__ . '/vendor/autoload.php');
 require_once(__DIR__ . "/config/env.php");
-require_once(__DIR__ . "/impl/BingNewsSearchApiClient.php");
-require_once(__DIR__ . "/impl/CnnClient.php");
+require_once(__DIR__ . "/searchclient/impl/BingNewsSearchApiClient.php");
+require_once(__DIR__ . "/searchclient/impl/CnnClient.php");
+require_once(__DIR__ . "/searchclient/impl/NatalieMusicClient.php");
 
+use tamai\news\server\searchclient\impl\BingNewsSearchApiClient;
+use tamai\news\server\searchclient\impl\CnnClient;
+use tamai\news\server\searchclient\impl\NatalieMusicClient;
 
-$searchWhiteList = ["玉井詩織", "百田夏菜子", "ももクロ", "ももいろクローバーZ", "佐々木彩夏", "高城れに", "ももいろクローバー"];
+$searchClient = getSearchClient();
+$searchResult = $searchClient->search();
+echo json_encode($searchResult);
+exit;
 
-if (isset($_GET['word']) && in_array($_GET['word'], $searchWhiteList)) {
+function getSearchClient() {
+	if (!isKeywordSearch()) {
+		return new CnnClient();
+	}
+
+	if (isNatalieSearch()) {
+		return new NatalieMusicClient();
+	}
+
 	$client = new BingNewsSearchApiClient();
-	echo json_encode($client->search($_GET['word']));
-	exit;
+	$client->setWord(getWord());
+	return $client;
 }
 
-echo json_encode((new CnnClient())->search());
-exit;
+function isKeywordSearch() {
+	$searchWhiteList = ["玉井詩織", "百田夏菜子", "ももクロ", "ももいろクローバーZ", "佐々木彩夏", "高城れに", "ももいろクローバー", "natalie"];
+	return !empty(getWord()) && in_array(getWord(), $searchWhiteList);
+}
+
+function isNatalieSearch() {
+	return getWord() === 'natalie';
+}
+
+function getWord() {
+	return isset($_GET["word"]) ? $_GET["word"] : "";
+}

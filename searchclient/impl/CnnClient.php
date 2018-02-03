@@ -1,6 +1,13 @@
 <?php
 
-class CnnClient {
+namespace tamai\news\server\searchclient\impl;
+
+use tamai\news\server\searchclient\SearchClient;
+use SimpleXMLElement;
+
+require_once(dirname(__DIR__) . "/SearchClient.php");
+
+class CnnClient implements SearchClient {
 
 	public function __construct() {
 	}

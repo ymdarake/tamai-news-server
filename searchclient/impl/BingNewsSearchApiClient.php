@@ -1,29 +1,40 @@
 <?php
 
-class BingNewsSearchApiClient {
+namespace tamai\news\server\searchclient\impl;
+
+use tamai\news\server\searchclient\SearchClient;
+
+
+require_once(dirname(__DIR__) . "/SearchClient.php");
+
+class BingNewsSearchApiClient implements SearchClient {
 
 	private $endPoint;
 	private $apiKey;
+	private $word;
 
 	public function __construct($endPoint = BING_SEARCH_API_ENDPOINT, $apiKey = BING_SEARCH_API_KEY) {
 		$this->endPoint = $endPoint;
 		$this->apiKey = $apiKey;
 	}
+	public function setWord($word) {
+		$this->word = $word;
+	}
 
-	public function search($word) {
+	public function search() {
 		if (strlen($this->apiKey) == 32) {
-		    return $this->format($this->_search($word));
+		    return $this->format($this->_search());
 		} else {
 		    print("Invalid Bing Search API subscription key!\n");
 		    print("Please paste yours into the source code.\n");
 		}
 	}
 
-	private function _search($word) {
+	private function _search() {
 	    $options = ['http' => ['header' => "Ocp-Apim-Subscription-Key: {$this->apiKey}\r\n", 'method' => 'GET']];
 	    $context = stream_context_create($options);
 	    // TODO: urlencodeして検索
-	    $url = $this->endPoint . "?" . http_build_query(["q" => $word, 'freshness' => 'Week', 'count' => "20", 'mkt' => "ja-JP", "originalImg" => "true"]);
+	    $url = $this->endPoint . "?" . http_build_query(["q" => $this->word, 'freshness' => 'Week', 'count' => "20", 'mkt' => "ja-JP", "originalImg" => "true"]);
 	    return file_get_contents($url, false, $context);
 	}
 
