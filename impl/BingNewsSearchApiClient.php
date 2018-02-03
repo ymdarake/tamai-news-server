@@ -23,7 +23,7 @@ class BingNewsSearchApiClient {
 	    $options = ['http' => ['header' => "Ocp-Apim-Subscription-Key: {$this->apiKey}\r\n", 'method' => 'GET']];
 	    $context = stream_context_create($options);
 	    // TODO: urlencodeして検索
-	    $url = $this->endPoint . "?" . http_build_query(["q" => $word, 'count' => 20, 'mkt' => "ja-JP", "originalImg" => "true"]);
+	    $url = $this->endPoint . "?" . http_build_query(["q" => $word, 'freshness' => 'Week', 'sortBy' => 'Date', 'count' => "20", 'mkt' => "ja-JP", "originalImg" => "true"]);
 	    return file_get_contents($url, false, $context);
 	}
 
@@ -32,6 +32,7 @@ class BingNewsSearchApiClient {
 		$assocArray = json_decode($json, true);
 		foreach ($assocArray['value'] as $each) {
 			$result[] = [
+				'datePublished' => $each['datePublished'],
 				'title' => $each['name'],
 				'description' => $each['description'],
 				'image' => isset($each['image']) ? $each['image']['thumbnail']['contentUrl'] : '',
