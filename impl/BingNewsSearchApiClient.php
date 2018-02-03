@@ -23,7 +23,7 @@ class BingNewsSearchApiClient {
 	    $options = ['http' => ['header' => "Ocp-Apim-Subscription-Key: {$this->apiKey}\r\n", 'method' => 'GET']];
 	    $context = stream_context_create($options);
 	    // TODO: urlencodeして検索
-	    $url = $this->endPoint . "?" . http_build_query(["q" => $word, 'freshness' => 'Week', 'sortBy' => 'Date', 'count' => "20", 'mkt' => "ja-JP", "originalImg" => "true"]);
+	    $url = $this->endPoint . "?" . http_build_query(["q" => $word, 'freshness' => 'Week', 'count' => "20", 'mkt' => "ja-JP", "originalImg" => "true"]);
 	    return file_get_contents($url, false, $context);
 	}
 
