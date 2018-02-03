@@ -6,9 +6,9 @@ require_once(__DIR__ . "/searchclient/impl/BingNewsSearchApiClient.php");
 require_once(__DIR__ . "/searchclient/impl/CnnClient.php");
 require_once(__DIR__ . "/searchclient/impl/NatalieMusicClient.php");
 
-use tamai\news\server\searchclient\impl\BingNewsSearchApiClient;
-use tamai\news\server\searchclient\impl\CnnClient;
-use tamai\news\server\searchclient\impl\NatalieMusicClient;
+use ymdarake\tamai\news\server\searchclient\impl\BingNewsSearchApiClient;
+use ymdarake\tamai\news\server\searchclient\impl\CnnClient;
+use ymdarake\tamai\news\server\searchclient\impl\NatalieMusicClient;
 
 
 $searchClient = getSearchClient();

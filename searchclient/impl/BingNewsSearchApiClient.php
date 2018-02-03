@@ -1,8 +1,8 @@
 <?php
 
-namespace tamai\news\server\searchclient\impl;
+namespace ymdarake\tamai\news\server\searchclient\impl;
 
-use tamai\news\server\searchclient\SearchClient;
+use ymdarake\tamai\news\server\searchclient\SearchClient;
 
 
 require_once(dirname(__DIR__) . "/SearchClient.php");

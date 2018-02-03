@@ -1,6 +1,6 @@
 <?php
 
-namespace tamai\news\server\searchclient;
+namespace ymdarake\tamai\news\server\searchclient;
 
 interface SearchClient {
 	public function search();
