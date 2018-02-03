@@ -4,6 +4,7 @@ namespace tamai\news\server\searchclient\impl;
 
 use tamai\news\server\searchclient\SearchClient;
 use SimpleXMLElement;
+use DOMDocument;
 
 require_once(dirname(__DIR__) . "/SearchClient.php");
 

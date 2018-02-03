@@ -10,6 +10,8 @@ use tamai\news\server\searchclient\impl\BingNewsSearchApiClient;
 use tamai\news\server\searchclient\impl\CnnClient;
 use tamai\news\server\searchclient\impl\NatalieMusicClient;
 
+$_GET["word"] = "natalie";
+
 $searchClient = getSearchClient();
 $searchResult = $searchClient->search();
 echo json_encode($searchResult);
